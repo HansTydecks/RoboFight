@@ -1,0 +1,11 @@
+{
+  "name": "RoboFight",
+  "short_name": "RoboFight",
+  "description": "Programmiere deinen Roboter mit Python.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f1530",
+  "theme_color": "#0f1530",
+  "icons": [{ "src": "img/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>RoboFight – Programmiere deinen Roboter</title>
+  <meta name="description" content="Lernspiel: Roboter mit Python programmieren und Missionen meistern.">
+  <meta name="theme-color" content="#0f1530">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="vendor/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="vendor/codemirror/lib/codemirror.js"></script>
+  <script src="vendor/codemirror/mode/python/python.js"></script>
+  <script src="vendor/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="vendor/codemirror/addon/edit/closebrackets.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="#/">
+      <img src="img/icon.svg" alt="" width="32" height="32">
+      <span>Robo<b>Fight</b></span>
+    </a>
+    <nav class="nav">
+      <a href="#/">Missionen</a>
+      <a href="#/werkstatt">Werkstatt</a>
+    </nav>
+    <div class="player-stats">
+      <span class="pill stars-pill" title="Gesammelte Sterne"><span class="star on"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></span><b id="stat-stars">0</b></span>
+      <span class="pill level-pill" title="Dein Level">
+        <span class="lvl">Lv <b id="stat-level">1</b></span>
+        <span class="lvl-info">
+          <span id="stat-title" class="lvl-title"></span>
+          <span class="xpbar"><span id="stat-xpbar"></span></span>
+        </span>
+        <span id="stat-xp" class="xp"></span>
+      </span>
+      <span class="pill engine" id="engine-status" data-status="loading"><i></i><span class="label">Python lädt …</span></span>
+    </div>
+  </header>
+
+  <main id="app"></main>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true"></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
