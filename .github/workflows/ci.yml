@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pytest
+      - run: pip install pytest httpx -r server/requirements.txt
       - run: python -m pytest -q
 
   # Deploys the game to GitHub Pages on pushes to main.

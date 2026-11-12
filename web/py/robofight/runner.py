@@ -1,7 +1,6 @@
 """Runs kid code against a mission and returns a JSON-serialisable replay."""
 
 import ast
-import builtins
 import json
 import random
 import sys
@@ -10,11 +9,12 @@ import traceback
 from .errors import (MissionComplete, RobotError, SimulationEnd, StepLimit,
                      explain_exception)
 from .robot_api import API_NAMES, CODE_FILENAME, current_line, make_robot
+from .sandbox import make_builtins
 from .world import World
 
 STEP_LIMIT = 200_000
-PROPERTY_NAMES = {"hp", "energy"}
-BLOCKED_BUILTINS = {"input", "open", "exit", "quit", "breakpoint", "help"}
+PROPERTY_NAMES = {"hp", "energy", "x", "y", "dir", "max_hp", "max_energy", "tick", "shield_active",
+                  "name", "arena_width", "arena_height"}
 
 
 def count_lines(code):
@@ -75,13 +75,10 @@ def _make_tracer(world):
 
 
 def _make_globals(world, robot):
-    safe = {k: v for k, v in vars(builtins).items() if k not in BLOCKED_BUILTINS}
-
     def kid_print(*args, sep=" ", end="", **_):
         world.event(type="print", text=sep.join(str(a) for a in args)[:200], line=current_line())
 
-    safe["print"] = kid_print
-    return {"__builtins__": safe, "__name__": "__robot__", "robot": robot}
+    return {"__builtins__": make_builtins(kid_print), "__name__": "__robot__", "robot": robot}
 
 
 def run_variant(mission, compiled, variant):
@@ -131,6 +128,27 @@ def _incomplete_reason(world):
     return "Dein Programm ist fertig, aber " + " und ".join(missing) + "."
 
 
+def run_arena_variant(mission, code, variant):
+    from . import data
+    from .arena import run_match
+    opp = data.ai_bot(mission["opponents"][variant])
+    res = run_match(
+        [{"name": "Dein Roboter", "code": code, "loadout": mission.get("loadout") or data.parts()["default_loadout"]},
+         {"name": opp["name"], "code": opp["code"], "loadout": opp["loadout"]}],
+        arena_id=mission["arena"], seed=100 + variant, max_ticks=mission.get("max_ticks", 150))
+    me = res["bots"][0]
+    if res["winner"] == 0:
+        status, reason, line = "success", f"Du hast {opp['name']} besiegt!", None
+    elif me["error"] and me["error"]["tick"] == 0:
+        status, reason, line = "error", me["error"]["message"], me["error"]["line"]
+    elif res["winner"] is None:
+        status, reason, line = "failed", res["reason"], None
+    else:
+        status, reason, line = "destroyed", f"{opp['name']} hat gewonnen. " + res["reason"], None
+    res.update(status=status, reason=reason, line=line, opponent=opp["id"])
+    return res
+
+
 def run_mission(mission, code):
     lines = count_lines(code)
     try:
@@ -145,7 +163,10 @@ def run_mission(mission, code):
             "variants": [],
         }
 
-    variants = [run_variant(mission, compiled, i) for i in range(len(mission["maps"]))]
+    if mission.get("type") == "arena":
+        variants = [run_arena_variant(mission, code, i) for i in range(len(mission["opponents"]))]
+    else:
+        variants = [run_variant(mission, compiled, i) for i in range(len(mission["maps"]))]
     ok = all(v["status"] == "success" for v in variants)
     ticks = max(v["ticks"] for v in variants)
     crit = mission.get("stars", {})

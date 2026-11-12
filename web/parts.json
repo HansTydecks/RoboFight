@@ -1,0 +1,41 @@
+{
+  "slots": {"weapons": 2, "modules": 2},
+  "default_loadout": {"chassis": "standard", "weapons": ["laser"], "modules": [], "paint": "cyan", "hat": "antenna"},
+  "default_inventory": ["standard", "laser", "cyan", "antenna", "none"],
+  "chassis": [
+    {"id": "standard", "name": "Standard-Chassis", "desc": "Ausgewogen in allem. Ein guter Start.", "hp": 8, "capacity": 9, "energy": 10, "regen": 1, "price": 0, "unlock": 0},
+    {"id": "scout", "name": "Späher", "desc": "Leicht und wendig. Turbo kostet keine Energie.", "hp": 6, "capacity": 8, "energy": 12, "regen": 2, "price": 150, "unlock": 3},
+    {"id": "tank", "name": "Panzer", "desc": "Viele Lebenspunkte und viel Platz, aber wenig Energie.", "hp": 13, "capacity": 14, "energy": 8, "regen": 1, "price": 300, "unlock": 9},
+    {"id": "hover", "name": "Schwebe-Gleiter", "desc": "Schwebt über Minen hinweg.", "hp": 7, "capacity": 10, "energy": 11, "regen": 1, "price": 250, "unlock": 12}
+  ],
+  "weapons": [
+    {"id": "laser", "name": "Laser", "desc": "Schnurgerader Strahl. 1 Schaden.", "api": "shoot", "weight": 3, "price": 0, "unlock": 4, "damage": 1, "cost": 2, "cooldown": 0},
+    {"id": "mines", "name": "Minenleger", "desc": "Legt eine Mine auf dein Feld (max. 3). Wer drauffährt: 3 Schaden.", "api": "drop_mine", "weight": 4, "price": 150, "unlock": 11, "damage": 3, "cost": 3, "cooldown": 3, "max_active": 3},
+    {"id": "rocket", "name": "Raketenwerfer", "desc": "Rakete fliegt 2 Felder pro Zug. 3 Schaden + 1 an Nachbarfeldern.", "api": "fire_rocket", "weight": 5, "price": 200, "unlock": 13, "damage": 3, "splash": 1, "cost": 4, "cooldown": 4, "speed": 2},
+    {"id": "railgun", "name": "Railgun", "desc": "Durchschlägt alle Roboter in einer Linie. 2 Schaden.", "api": "fire_railgun", "weight": 6, "price": 350, "unlock": 15, "damage": 2, "cost": 5, "cooldown": 5}
+  ],
+  "modules": [
+    {"id": "turbo", "name": "Turbo-Düsen", "desc": "robot.dash(): springt 2 Felder nach vorn.", "api": "dash", "weight": 2, "price": 100, "unlock": 2, "cost": 3, "cooldown": 5},
+    {"id": "armor", "name": "Panzerplatten", "desc": "Passiv: Treffer mit 2+ Schaden machen 1 weniger.", "api": null, "weight": 4, "price": 180, "unlock": 6},
+    {"id": "battery", "name": "Zusatz-Akku", "desc": "Passiv: +5 maximale Energie, +1 Aufladung pro Zug.", "api": null, "weight": 2, "price": 100, "unlock": 7, "energy": 5, "regen": 1},
+    {"id": "shield", "name": "Schildgenerator", "desc": "robot.shield(): blockt 2 Züge lang jeden Schaden.", "api": "shield", "weight": 3, "price": 150, "unlock": 9, "cost": 3, "cooldown": 8, "duration": 2},
+    {"id": "repair", "name": "Reparatur-Arm", "desc": "robot.repair(): +2 Lebenspunkte.", "api": "repair", "weight": 3, "price": 150, "unlock": 10, "cost": 4, "cooldown": 12, "heal": 2},
+    {"id": "radar", "name": "Langstrecken-Radar", "desc": "Passiv: robot.scan() sieht die ganze Arena statt nur 5 Felder weit.", "api": null, "weight": 2, "price": 120, "unlock": 14, "range": 99}
+  ],
+  "paints": [
+    {"id": "cyan", "name": "Eisblau", "color": "#36d6ff", "dark": "#147a99", "price": 0},
+    {"id": "orange", "name": "Feuer-Orange", "color": "#ff9a2e", "dark": "#a3520b", "price": 120},
+    {"id": "green", "name": "Gift-Grün", "color": "#4ee06a", "dark": "#1d7a31", "price": 120},
+    {"id": "purple", "name": "Ultra-Violett", "color": "#a77bff", "dark": "#5a37a8", "price": 120},
+    {"id": "red", "name": "Kampf-Rot", "color": "#ff4d6d", "dark": "#9a1f37", "price": 120},
+    {"id": "white", "name": "Polarweiß", "color": "#e8ecff", "dark": "#7c86b8", "price": 150},
+    {"id": "gold", "name": "Meister-Gold", "color": "#ffd24a", "dark": "#9a7414", "price": 500, "badge": "perfect"}
+  ],
+  "hats": [
+    {"id": "none", "name": "Nichts", "price": 0},
+    {"id": "antenna", "name": "Funkantenne", "price": 0},
+    {"id": "propeller", "name": "Propellermütze", "price": 150},
+    {"id": "horns", "name": "Teufelshörner", "price": 200},
+    {"id": "crown", "name": "Krone", "price": 0, "badge": "boss"}
+  ]
+}

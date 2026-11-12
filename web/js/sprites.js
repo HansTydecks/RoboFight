@@ -211,6 +211,11 @@ const PROCEDURAL = {
     ctx.fill();
   },
 
+  friend(ctx, x, y, s, o) {
+    ctx.translate(x + s * 0.1, y + s * 0.1);
+    PROCEDURAL.robot(ctx, 0, 0, s * 0.8, { ...o, angle: Math.PI / 2, color: "#4ee06a", colorDark: "#1d7a31" });
+  },
+
   robot(ctx, x, y, s, o) {
     const cx = x + s / 2, cy = y + s / 2;
     const dead = o.dead;

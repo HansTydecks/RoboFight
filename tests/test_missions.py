@@ -33,6 +33,18 @@ SOLUTIONS = {
         "        robot.turn_right()\n"),
     10: ("while robot.enemy_count() > 0:\n    if robot.enemy_ahead():\n        robot.shoot()\n"
          "    else:\n        robot.wait()\n"),
+    11: ("schritte = 0\nwhile robot.front_is_clear():\n    robot.move()\n    schritte = schritte + 1\n"
+         "robot.report(schritte)\n"),
+    12: ("def nische():\n    robot.turn_left()\n    robot.shoot()\n    robot.shoot()\n    robot.turn_right()\n\n"
+         "robot.move(1)\nnische()\nrobot.move(3)\nnische()\nrobot.move(4)\nnische()\nrobot.move(2)\nnische()\n"
+         "robot.move(1)\n"),
+    13: ("def treppe(n):\n    for i in range(n):\n        robot.move()\n        robot.turn_right()\n"
+         "        robot.move()\n        robot.turn_left()\n\ntreppe(2)\nrobot.move(2)\ntreppe(3)\nrobot.move()\n"),
+    14: "for richtung in robot.scan_directions():\n    robot.face(richtung)\n    robot.shoot()\n",
+    15: ('for ding in robot.scan():\n    if ding["typ"] == "feind":\n        robot.face(ding["richtung"])\n'
+         '        robot.shoot()\n'),
+    16: ('def update(robot):\n    if robot.enemy_ahead():\n        if robot.ready("shield") and not robot.shield_active:\n'
+         '            robot.shield()\n        else:\n            robot.shoot()\n    else:\n        robot.turn_right()\n'),
 }
 
 
@@ -48,8 +60,46 @@ def test_reference_solution_gets_three_stars(mid):
 def test_maps_are_rectangular_and_have_one_start(mid):
     for rows in MISSIONS[mid]["maps"]:
         assert len({len(r) for r in rows}) == 1
+        if MISSIONS[mid].get("type") == "arena":
+            continue
         starts = sum(r.count(c) for r in rows for c in "^>v<")
         assert starts == 1
+
+
+def test_wrong_measurement_fails():
+    res = run_mission(MISSIONS[11], "robot.report(7)\n")
+    assert res["variants"][0]["status"] == "failed" and "richtig wäre" in res["variants"][0]["reason"]
+    assert res["variants"][2]["status"] == "failed"
+
+
+def test_shooting_friends_fails():
+    code = "for ding in robot.scan():\n    robot.face(ding['richtung'])\n    robot.shoot()\n"
+    res = run_mission(MISSIONS[15], code)
+    assert not res["ok"] and "Freund" in res["variants"][0]["reason"]
+
+
+def test_list_solution_not_allowed_in_dict_mission():
+    res = run_mission(MISSIONS[15], SOLUTIONS[14])
+    assert "gesperrt" in res["variants"][0]["reason"]
+
+
+def test_arena_starter_draws_against_kreisel():
+    res = run_mission(MISSIONS[16], MISSIONS[16]["starter_code"])
+    assert [v["status"] for v in res["variants"]] == ["success", "failed"]
+
+
+def test_arena_mission_missing_update():
+    res = run_mission(MISSIONS[16], "robot = 1\n")
+    assert res["variants"][0]["status"] == "error" and "update" in res["variants"][0]["reason"]
+
+
+def test_function_solution_beats_flat_code_in_lines():
+    flat = ("robot.move(1)\n" + "robot.turn_left()\nrobot.shoot()\nrobot.shoot()\nrobot.turn_right()\n"
+            "robot.move(3)\nrobot.turn_left()\nrobot.shoot()\nrobot.shoot()\nrobot.turn_right()\n"
+            "robot.move(4)\nrobot.turn_left()\nrobot.shoot()\nrobot.shoot()\nrobot.turn_right()\n"
+            "robot.move(2)\nrobot.turn_left()\nrobot.shoot()\nrobot.shoot()\nrobot.turn_right()\nrobot.move(1)\n")
+    res = run_mission(MISSIONS[12], flat)
+    assert res["ok"] and res["stars"] == 2
 
 
 def test_hardcoded_corridor_fails_other_variants():

@@ -23,11 +23,16 @@ UNLOCK_HINT = {
     "enemy_ahead": "Mission 9",
     "enemy_count": "Mission 10",
     "wait": "Mission 10",
+    "report": "Mission 11",
+    "face": "Mission 14",
+    "scan_directions": "Mission 14",
+    "scan": "Mission 15",
 }
 
 API_NAMES = [
     "move", "turn_left", "turn_right", "shoot", "wait", "say",
     "at_goal", "front_is_clear", "enemy_ahead", "enemy_count", "hp", "energy",
+    "report", "face", "scan_directions", "scan",
 ]
 
 
@@ -95,6 +100,33 @@ def make_robot(world, allowed):
             require("wait")
             world.act("wait", current_line())
             world.after_command()
+
+        def face(self, richtung):
+            """Dreht sich direkt in eine Richtung ("N", "O"/"E", "S", "W"). Kostet einen Zug, wenn er sich drehen muss."""
+            require("face", "robot.face()")
+            d = str(richtung).upper().replace("O", "E")
+            if d not in ("N", "E", "S", "W"):
+                raise RobotError('`robot.face()` braucht "N", "O", "S" oder "W".')
+            if d != world.rdir:
+                world.act("face", current_line(), d=d)
+                world.after_command()
+
+        def report(self, wert):
+            """Meldet einen Messwert an die Zentrale."""
+            require("report")
+            world.report(wert, current_line())
+
+        def scan_directions(self):
+            """Liste der Richtungen, in denen ein Gegner zu sehen ist, z.B. ["N", "W"]."""
+            require("scan_directions", "robot.scan_directions()")
+            check_running()
+            return [e["richtung"] for e in world.scan() if e["typ"] == "feind"]
+
+        def scan(self):
+            """Liste von Dictionaries: {"richtung": "N", "distanz": 3, "typ": "feind"}."""
+            require("scan")
+            check_running()
+            return world.scan()
 
         def say(self, *text):
             """Zeigt eine Sprechblase über dem Roboter (kostet keinen Zug)."""

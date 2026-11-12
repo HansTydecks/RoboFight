@@ -1,282 +1,904 @@
 [
-  {
-    "id": 1,
-    "title": "Erste Schritte",
-    "concept": "Befehle",
-    "story": "Dein Roboter ist frisch aus der Werkstatt. Zeit für die erste Probefahrt!",
-    "task": "Fahre den Roboter auf das grüne Zielfeld.",
-    "hints": [
-      "Jeder `robot.move()` fährt genau ein Feld nach vorn.",
-      "Zähle die Felder bis zum Ziel. Du brauchst so viele `robot.move()`-Zeilen."
-    ],
-    "api": ["move"],
-    "introduces": ["move"],
-    "goals": ["reach_goal"],
-    "maps": [[
-      "#######",
-      "#>...G#",
-      "#######"
-    ]],
-    "max_ticks": 60,
-    "stars": {"lines": 4, "ticks": 4},
-    "starter_code": "# Bring den Roboter zum Ziel!\nrobot.move()\n",
-    "reward": {"icon": "steer", "name": "Lenkung", "text": "Jetzt kannst du dich drehen: robot.turn_left() und robot.turn_right()"}
+ {
+  "id": 1,
+  "title": "Erste Schritte",
+  "concept": "Befehle",
+  "story": "Dein Roboter ist frisch aus der Werkstatt. Zeit für die erste Probefahrt!",
+  "task": "Fahre den Roboter auf das grüne Zielfeld.",
+  "hints": [
+   "Jeder `robot.move()` fährt genau ein Feld nach vorn.",
+   "Zähle die Felder bis zum Ziel. Du brauchst so viele `robot.move()`-Zeilen."
+  ],
+  "api": [
+   "move"
+  ],
+  "introduces": [
+   "move"
+  ],
+  "goals": [
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "#######",
+    "#>...G#",
+    "#######"
+   ]
+  ],
+  "max_ticks": 60,
+  "stars": {
+   "lines": 4,
+   "ticks": 4
   },
-  {
-    "id": 2,
-    "title": "Um die Ecke",
-    "concept": "Reihenfolge",
-    "story": "Die Werkstatt hat verwinkelte Gänge. Geradeaus allein reicht nicht mehr.",
-    "task": "Fahre um die Ecken bis ins Ziel.",
-    "hints": [
-      "`robot.turn_right()` dreht den Roboter auf der Stelle um 90° nach rechts.",
-      "Die Pfeilspitze am Roboter zeigt, wohin er gerade schaut.",
-      "Rechts und links sind immer aus Sicht des Roboters gemeint!"
-    ],
-    "api": ["move", "turn_left", "turn_right"],
-    "introduces": ["turn_left", "turn_right"],
-    "goals": ["reach_goal"],
-    "maps": [[
-      "#######",
-      "#>..###",
-      "###.###",
-      "###..G#",
-      "#######"
-    ]],
-    "max_ticks": 60,
-    "stars": {"lines": 8, "ticks": 8},
-    "starter_code": "robot.move()\nrobot.move()\nrobot.turn_right()\n",
-    "reward": {"icon": "turbo", "name": "Turbo", "text": "robot.move(5) fährt 5 Felder auf einmal – du brauchst weniger Zeilen!"}
+  "starter_code": "# Bring den Roboter zum Ziel!\nrobot.move()\n",
+  "reward": {
+   "icon": "steer",
+   "name": "Lenkung",
+   "text": "Jetzt kannst du dich drehen: robot.turn_left() und robot.turn_right()"
   },
-  {
-    "id": 3,
-    "title": "Weite Wege",
-    "concept": "Parameter",
-    "story": "Die Lagerhalle ist riesig. Mit dem Turbo kommst du schneller voran.",
-    "task": "Erreiche das Ziel mit möglichst wenigen Zeilen Code.",
-    "hints": [
-      "Die Zahl in den Klammern ist ein Parameter: `robot.move(8)` fährt 8 Felder.",
-      "Für 3 Sterne reichen 5 Zeilen."
-    ],
-    "api": ["move", "move_n", "turn_left", "turn_right"],
-    "introduces": ["move_n"],
-    "goals": ["reach_goal"],
-    "maps": [[
-      "###########",
-      "#>........#",
-      "#########.#",
-      "#G........#",
-      "###########"
-    ]],
-    "max_ticks": 60,
-    "stars": {"lines": 5, "ticks": 20},
-    "starter_code": "robot.move(8)\n",
-    "reward": {"icon": "magnet", "name": "Kristall-Magnet", "text": "Dein Roboter sammelt Kristalle ein, wenn er darüber fährt."}
+  "chapter": 1
+ },
+ {
+  "id": 2,
+  "title": "Um die Ecke",
+  "concept": "Reihenfolge",
+  "story": "Die Werkstatt hat verwinkelte Gänge. Geradeaus allein reicht nicht mehr.",
+  "task": "Fahre um die Ecken bis ins Ziel.",
+  "hints": [
+   "`robot.turn_right()` dreht den Roboter auf der Stelle um 90° nach rechts.",
+   "Die Pfeilspitze am Roboter zeigt, wohin er gerade schaut.",
+   "Rechts und links sind immer aus Sicht des Roboters gemeint!"
+  ],
+  "api": [
+   "move",
+   "turn_left",
+   "turn_right"
+  ],
+  "introduces": [
+   "turn_left",
+   "turn_right"
+  ],
+  "goals": [
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "#######",
+    "#>..###",
+    "###.###",
+    "###..G#",
+    "#######"
+   ]
+  ],
+  "max_ticks": 60,
+  "stars": {
+   "lines": 8,
+   "ticks": 8
   },
-  {
-    "id": 4,
-    "title": "Kristallsammler",
-    "concept": "Planen",
-    "story": "In der Mine glitzern Energie-Kristalle. Sammle alle ein, bevor du rausfährst!",
-    "task": "Sammle alle Kristalle ein und fahre dann ins Ziel.",
-    "hints": [
-      "Kristalle werden automatisch eingesammelt, wenn du über sie fährst.",
-      "Plane zuerst den Weg auf dem Spielfeld, dann schreibe den Code."
-    ],
-    "api": ["move", "move_n", "turn_left", "turn_right"],
-    "introduces": [],
-    "goals": ["collect_all", "reach_goal"],
-    "maps": [[
-      "#########",
-      "#>.C.C..#",
-      "#######.#",
-      "#.C..C..#",
-      "#G#######"
-    ]],
-    "max_ticks": 60,
-    "stars": {"lines": 7, "ticks": 18},
-    "starter_code": "# Sammle alle Kristalle ein!\n",
-    "reward": {"icon": "laser", "name": "Laser", "text": "robot.shoot() feuert einen Laser geradeaus."}
+  "starter_code": "robot.move()\nrobot.move()\nrobot.turn_right()\n",
+  "reward": {
+   "icon": "turbo",
+   "name": "Turbo",
+   "text": "robot.move(5) fährt 5 Felder auf einmal – du brauchst weniger Zeilen!"
   },
-  {
-    "id": 5,
-    "title": "Zielübung",
-    "concept": "Neue Aktion",
-    "story": "Auf dem Schießstand versperren Zielscheiben den Weg. Zeit, den neuen Laser zu testen!",
-    "task": "Zerstöre alle Zielscheiben und fahre ins Ziel.",
-    "hints": [
-      "Der Laser fliegt geradeaus, bis er eine Wand oder ein Ziel trifft.",
-      "Du kannst auch aus der Ferne schießen – du musst nicht direkt davor stehen."
-    ],
-    "api": ["move", "move_n", "turn_left", "turn_right", "shoot"],
-    "introduces": ["shoot"],
-    "goals": ["destroy_all", "reach_goal"],
-    "maps": [[
-      "##########",
-      "#>..T..T.#",
-      "########.#",
-      "#G.T.....#",
-      "##########"
-    ]],
-    "max_ticks": 60,
-    "stars": {"lines": 8, "ticks": 21},
-    "starter_code": "robot.shoot()\n",
-    "reward": {"icon": "loop", "name": "Schleifen-Chip", "text": "Mit for-Schleifen wiederholt dein Roboter Befehle, ohne dass du sie oft tippen musst."}
+  "chapter": 1
+ },
+ {
+  "id": 3,
+  "title": "Weite Wege",
+  "concept": "Parameter",
+  "story": "Die Lagerhalle ist riesig. Mit dem Turbo kommst du schneller voran.",
+  "task": "Erreiche das Ziel mit möglichst wenigen Zeilen Code.",
+  "hints": [
+   "Die Zahl in den Klammern ist ein Parameter: `robot.move(8)` fährt 8 Felder.",
+   "Für 3 Sterne reichen 5 Zeilen."
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right"
+  ],
+  "introduces": [
+   "move_n"
+  ],
+  "goals": [
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "###########",
+    "#>........#",
+    "#########.#",
+    "#G........#",
+    "###########"
+   ]
+  ],
+  "max_ticks": 60,
+  "stars": {
+   "lines": 5,
+   "ticks": 20
   },
-  {
-    "id": 6,
-    "title": "Die Treppe",
-    "concept": "for-Schleife",
-    "story": "Eine lange Treppe nach unten. Immer das gleiche Muster … das muss doch kürzer gehen!",
-    "task": "Steige die Treppe hinab. Für 3 Sterne brauchst du eine Schleife.",
-    "hints": [
-      "Finde das Muster: Welche 4 Befehle wiederholen sich immer wieder?",
-      "So wiederholst du etwas 5-mal:\n```\nfor i in range(5):\n    robot.move()\n```",
-      "Alles, was eingerückt unter dem `for` steht, wird wiederholt."
-    ],
-    "api": ["move", "move_n", "turn_left", "turn_right", "shoot"],
-    "introduces": ["for"],
-    "goals": ["reach_goal"],
-    "maps": [[
-      "##########",
-      "#>.#######",
-      "##..######",
-      "###..#####",
-      "####..####",
-      "#####..###",
-      "######.G##",
-      "##########"
-    ]],
-    "max_ticks": 60,
-    "stars": {"lines": 6, "ticks": 21},
-    "starter_code": "for i in range(5):\n    robot.move()\n",
-    "reward": {"icon": "scanner", "name": "Ziel-Scanner", "text": "robot.at_goal() verrät dir, ob du auf dem Ziel stehst."}
+  "starter_code": "robot.move(8)\n",
+  "reward": {
+   "icon": "magnet",
+   "name": "Kristall-Magnet",
+   "text": "Dein Roboter sammelt Kristalle ein, wenn er darüber fährt."
   },
-  {
-    "id": 7,
-    "title": "Der unbekannte Gang",
-    "concept": "while-Schleife",
-    "story": "Nebel! Der Roboter weiß nicht, wie lang der Gang ist. Und jedes Mal ist er anders lang …",
-    "task": "Dein Code muss in ALLEN drei Gängen funktionieren. Halte genau auf dem Ziel an.",
-    "hints": [
-      "`while` wiederholt, solange eine Bedingung stimmt.",
-      "`not` dreht True und False um.",
-      "```\nwhile not robot.at_goal():\n    robot.move()\n```"
-    ],
-    "api": ["move", "move_n", "turn_left", "turn_right", "shoot", "at_goal"],
-    "introduces": ["at_goal", "while"],
-    "goals": ["reach_goal"],
-    "maps": [
-      ["###########",
-       "#>...G....#",
-       "###########"],
-      ["##############",
-       "#>.........G.#",
-       "##############"],
-      ["###########",
-       "#>......G.#",
-       "###########"]
-    ],
-    "max_ticks": 120,
-    "stars": {"lines": 2, "ticks": 10},
-    "starter_code": "while not robot.at_goal():\n    pass  # was soll wiederholt werden?\n",
-    "reward": {"icon": "eye", "name": "Sensor-Auge", "text": "robot.front_is_clear() prüft, ob das Feld vor dir frei ist."}
+  "chapter": 1
+ },
+ {
+  "id": 4,
+  "title": "Kristallsammler",
+  "concept": "Planen",
+  "story": "In der Mine glitzern Energie-Kristalle. Sammle alle ein, bevor du rausfährst!",
+  "task": "Sammle alle Kristalle ein und fahre dann ins Ziel.",
+  "hints": [
+   "Kristalle werden automatisch eingesammelt, wenn du über sie fährst.",
+   "Plane zuerst den Weg auf dem Spielfeld, dann schreibe den Code."
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right"
+  ],
+  "introduces": [],
+  "goals": [
+   "collect_all",
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "#########",
+    "#>.C.C..#",
+    "#######.#",
+    "#.C..C..#",
+    "#G#######"
+   ]
+  ],
+  "max_ticks": 60,
+  "stars": {
+   "lines": 7,
+   "ticks": 18
   },
-  {
-    "id": 8,
-    "title": "Wände erkennen",
-    "concept": "if / else",
-    "story": "Das Labyrinth verändert sich ständig. Dein Roboter muss selbst entscheiden, wann er abbiegt.",
-    "task": "Finde in allen drei Labyrinthen das Ziel. Tipp: Alle Gänge biegen nach rechts ab.",
-    "hints": [
-      "`if` entscheidet: Wenn die Bedingung stimmt, mache dies – `else`: sonst das.",
-      "Wenn vorne frei ist: fahren. Sonst: rechts drehen.",
-      "```\nif robot.front_is_clear():\n    robot.move()\nelse:\n    robot.turn_right()\n```"
-    ],
-    "api": ["move", "move_n", "turn_left", "turn_right", "shoot", "at_goal", "front_is_clear"],
-    "introduces": ["front_is_clear", "if"],
-    "goals": ["reach_goal"],
-    "maps": [
-      ["#######",
-       "#>....#",
-       "#####.#",
-       "#G....#",
-       "#######"],
-      ["##########",
-       "#.......G#",
-       "#.########",
-       "#^########",
-       "##########"],
-      ["########",
-       "#>....##",
-       "#####.##",
-       "#####.##",
-       "#G....##",
-       "########"]
-    ],
-    "max_ticks": 120,
-    "stars": {"lines": 5, "ticks": 18},
-    "starter_code": "while not robot.at_goal():\n    if robot.front_is_clear():\n        robot.move()\n",
-    "reward": {"icon": "radar", "name": "Gegner-Radar", "text": "robot.enemy_ahead() erkennt Gegner in deiner Blickrichtung."}
+  "starter_code": "# Sammle alle Kristalle ein!\n",
+  "reward": {
+   "icon": "laser",
+   "name": "Laser",
+   "text": "robot.shoot() feuert einen Laser geradeaus."
   },
-  {
-    "id": 9,
-    "title": "Wachposten",
-    "concept": "elif",
-    "story": "Wachroboter versperren die Gänge. Kommst du ihnen zu nah, schießen sie! Sieh sie also früh genug.",
-    "task": "Schalte die Wachposten aus der Ferne aus und erreiche das Ziel – in beiden Gängen.",
-    "hints": [
-      "Wachposten schießen nur, wenn du direkt neben ihnen stehst.",
-      "Mit `elif` prüfst du eine zweite Bedingung, wenn die erste nicht stimmt.",
-      "Reihenfolge: Gegner vorne? → schießen. Sonst frei? → fahren. Sonst → drehen."
-    ],
-    "api": ["move", "move_n", "turn_left", "turn_right", "shoot", "at_goal", "front_is_clear", "enemy_ahead"],
-    "introduces": ["enemy_ahead", "elif"],
-    "goals": ["reach_goal"],
-    "robot": {"hp": 3},
-    "maps": [
-      ["##############",
-       "#>...E....E.G#",
-       "##############"],
-      ["#########",
-       "#>.....E#",
-       "#######.#",
-       "#G..E...#",
-       "#########"]
-    ],
-    "max_ticks": 120,
-    "stars": {"lines": 7, "ticks": 20},
-    "starter_code": "while not robot.at_goal():\n    if robot.enemy_ahead():\n        robot.shoot()\n",
-    "reward": {"icon": "battery", "name": "Energiezelle", "text": "robot.wait(), robot.enemy_count() und robot.energy – bereit für den Boss!"}
+  "chapter": 1
+ },
+ {
+  "id": 5,
+  "title": "Zielübung",
+  "concept": "Neue Aktion",
+  "story": "Auf dem Schießstand versperren Zielscheiben den Weg. Zeit, den neuen Laser zu testen!",
+  "task": "Zerstöre alle Zielscheiben und fahre ins Ziel.",
+  "hints": [
+   "Der Laser fliegt geradeaus, bis er eine Wand oder ein Ziel trifft.",
+   "Du kannst auch aus der Ferne schießen – du musst nicht direkt davor stehen."
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot"
+  ],
+  "introduces": [
+   "shoot"
+  ],
+  "goals": [
+   "destroy_all",
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "##########",
+    "#>..T..T.#",
+    "########.#",
+    "#G.T.....#",
+    "##########"
+   ]
+  ],
+  "max_ticks": 60,
+  "stars": {
+   "lines": 8,
+   "ticks": 21
   },
-  {
-    "id": 10,
-    "title": "Boss: Der Wächter",
-    "concept": "Alles zusammen",
-    "story": "Der Wächter patrouilliert vor dem Ausgang. Er ist gepanzert und schießt zurück. Dein Laser hat nur 5 Energie – verschwende keinen Schuss!",
-    "task": "Besiege den Wächter. Jeder Schuss kostet 1 Energie.",
-    "hints": [
-      "Schieße nur, wenn der Wächter wirklich vor dir ist. Sonst: `robot.wait()`.",
-      "`robot.enemy_count()` sagt dir, wie viele Gegner noch übrig sind.",
-      "Lass dir mit `robot.say(robot.energy)` anzeigen, wie viel Energie du noch hast."
-    ],
-    "api": ["move", "move_n", "turn_left", "turn_right", "shoot", "at_goal", "front_is_clear", "enemy_ahead", "enemy_count", "wait"],
-    "introduces": ["wait", "enemy_count", "energy"],
-    "goals": ["destroy_all"],
-    "robot": {"hp": 3, "energy": 5},
-    "boss_hp": 3,
-    "maps": [[
-      "##########",
-      "#.......B#",
-      "#........#",
-      "#>.......#",
-      "#........#",
-      "#........#",
-      "##########"
-    ]],
-    "max_ticks": 80,
-    "stars": {"lines": 5, "ticks": 11},
-    "starter_code": "while robot.enemy_count() > 0:\n    robot.shoot()\n",
-    "reward": {"icon": "trophy", "name": "Wächter-Bezwinger", "text": "Kampagne 1 geschafft! Bald öffnet die Arena …"}
+  "starter_code": "robot.shoot()\n",
+  "reward": {
+   "icon": "loop",
+   "name": "Schleifen-Chip",
+   "text": "Mit for-Schleifen wiederholt dein Roboter Befehle, ohne dass du sie oft tippen musst."
+  },
+  "chapter": 1
+ },
+ {
+  "id": 6,
+  "title": "Die Treppe",
+  "concept": "for-Schleife",
+  "story": "Eine lange Treppe nach unten. Immer das gleiche Muster … das muss doch kürzer gehen!",
+  "task": "Steige die Treppe hinab. Für 3 Sterne brauchst du eine Schleife.",
+  "hints": [
+   "Finde das Muster: Welche 4 Befehle wiederholen sich immer wieder?",
+   "So wiederholst du etwas 5-mal:\n```\nfor i in range(5):\n    robot.move()\n```",
+   "Alles, was eingerückt unter dem `for` steht, wird wiederholt."
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot"
+  ],
+  "introduces": [
+   "for"
+  ],
+  "goals": [
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "##########",
+    "#>.#######",
+    "##..######",
+    "###..#####",
+    "####..####",
+    "#####..###",
+    "######.G##",
+    "##########"
+   ]
+  ],
+  "max_ticks": 60,
+  "stars": {
+   "lines": 6,
+   "ticks": 21
+  },
+  "starter_code": "for i in range(5):\n    robot.move()\n",
+  "reward": {
+   "icon": "scanner",
+   "name": "Ziel-Scanner",
+   "text": "robot.at_goal() verrät dir, ob du auf dem Ziel stehst."
+  },
+  "chapter": 1
+ },
+ {
+  "id": 7,
+  "title": "Der unbekannte Gang",
+  "concept": "while-Schleife",
+  "story": "Nebel! Der Roboter weiß nicht, wie lang der Gang ist. Und jedes Mal ist er anders lang …",
+  "task": "Dein Code muss in ALLEN drei Gängen funktionieren. Halte genau auf dem Ziel an.",
+  "hints": [
+   "`while` wiederholt, solange eine Bedingung stimmt.",
+   "`not` dreht True und False um.",
+   "```\nwhile not robot.at_goal():\n    robot.move()\n```"
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "at_goal"
+  ],
+  "introduces": [
+   "at_goal",
+   "while"
+  ],
+  "goals": [
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "###########",
+    "#>...G....#",
+    "###########"
+   ],
+   [
+    "##############",
+    "#>.........G.#",
+    "##############"
+   ],
+   [
+    "###########",
+    "#>......G.#",
+    "###########"
+   ]
+  ],
+  "max_ticks": 120,
+  "stars": {
+   "lines": 2,
+   "ticks": 10
+  },
+  "starter_code": "while not robot.at_goal():\n    pass  # was soll wiederholt werden?\n",
+  "reward": {
+   "icon": "eye",
+   "name": "Sensor-Auge",
+   "text": "robot.front_is_clear() prüft, ob das Feld vor dir frei ist."
+  },
+  "chapter": 1
+ },
+ {
+  "id": 8,
+  "title": "Wände erkennen",
+  "concept": "if / else",
+  "story": "Das Labyrinth verändert sich ständig. Dein Roboter muss selbst entscheiden, wann er abbiegt.",
+  "task": "Finde in allen drei Labyrinthen das Ziel. Tipp: Alle Gänge biegen nach rechts ab.",
+  "hints": [
+   "`if` entscheidet: Wenn die Bedingung stimmt, mache dies – `else`: sonst das.",
+   "Wenn vorne frei ist: fahren. Sonst: rechts drehen.",
+   "```\nif robot.front_is_clear():\n    robot.move()\nelse:\n    robot.turn_right()\n```"
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "at_goal",
+   "front_is_clear"
+  ],
+  "introduces": [
+   "front_is_clear",
+   "if"
+  ],
+  "goals": [
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "#######",
+    "#>....#",
+    "#####.#",
+    "#G....#",
+    "#######"
+   ],
+   [
+    "##########",
+    "#.......G#",
+    "#.########",
+    "#^########",
+    "##########"
+   ],
+   [
+    "########",
+    "#>....##",
+    "#####.##",
+    "#####.##",
+    "#G....##",
+    "########"
+   ]
+  ],
+  "max_ticks": 120,
+  "stars": {
+   "lines": 5,
+   "ticks": 18
+  },
+  "starter_code": "while not robot.at_goal():\n    if robot.front_is_clear():\n        robot.move()\n",
+  "reward": {
+   "icon": "radar",
+   "name": "Gegner-Radar",
+   "text": "robot.enemy_ahead() erkennt Gegner in deiner Blickrichtung."
+  },
+  "chapter": 1
+ },
+ {
+  "id": 9,
+  "title": "Wachposten",
+  "concept": "elif",
+  "story": "Wachroboter versperren die Gänge. Kommst du ihnen zu nah, schießen sie! Sieh sie also früh genug.",
+  "task": "Schalte die Wachposten aus der Ferne aus und erreiche das Ziel – in beiden Gängen.",
+  "hints": [
+   "Wachposten schießen nur, wenn du direkt neben ihnen stehst.",
+   "Mit `elif` prüfst du eine zweite Bedingung, wenn die erste nicht stimmt.",
+   "Reihenfolge: Gegner vorne? → schießen. Sonst frei? → fahren. Sonst → drehen."
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "at_goal",
+   "front_is_clear",
+   "enemy_ahead"
+  ],
+  "introduces": [
+   "enemy_ahead",
+   "elif"
+  ],
+  "goals": [
+   "reach_goal"
+  ],
+  "robot": {
+   "hp": 3
+  },
+  "maps": [
+   [
+    "##############",
+    "#>...E....E.G#",
+    "##############"
+   ],
+   [
+    "#########",
+    "#>.....E#",
+    "#######.#",
+    "#G..E...#",
+    "#########"
+   ]
+  ],
+  "max_ticks": 120,
+  "stars": {
+   "lines": 7,
+   "ticks": 20
+  },
+  "starter_code": "while not robot.at_goal():\n    if robot.enemy_ahead():\n        robot.shoot()\n",
+  "reward": {
+   "icon": "battery",
+   "name": "Energiezelle",
+   "text": "robot.wait(), robot.enemy_count() und robot.energy – bereit für den Boss!"
+  },
+  "chapter": 1
+ },
+ {
+  "id": 10,
+  "title": "Boss: Der Wächter",
+  "concept": "Alles zusammen",
+  "story": "Der Wächter patrouilliert vor dem Ausgang. Er ist gepanzert und schießt zurück. Dein Laser hat nur 5 Energie – verschwende keinen Schuss!",
+  "task": "Besiege den Wächter. Jeder Schuss kostet 1 Energie.",
+  "hints": [
+   "Schieße nur, wenn der Wächter wirklich vor dir ist. Sonst: `robot.wait()`.",
+   "`robot.enemy_count()` sagt dir, wie viele Gegner noch übrig sind.",
+   "Lass dir mit `robot.say(robot.energy)` anzeigen, wie viel Energie du noch hast."
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "at_goal",
+   "front_is_clear",
+   "enemy_ahead",
+   "enemy_count",
+   "wait"
+  ],
+  "introduces": [
+   "wait",
+   "enemy_count",
+   "energy"
+  ],
+  "goals": [
+   "destroy_all"
+  ],
+  "robot": {
+   "hp": 3,
+   "energy": 5
+  },
+  "boss_hp": 3,
+  "maps": [
+   [
+    "##########",
+    "#.......B#",
+    "#........#",
+    "#>.......#",
+    "#........#",
+    "#........#",
+    "##########"
+   ]
+  ],
+  "max_ticks": 80,
+  "stars": {
+   "lines": 5,
+   "ticks": 11
+  },
+  "starter_code": "while robot.enemy_count() > 0:\n    robot.shoot()\n",
+  "reward": {
+   "icon": "trophy",
+   "name": "Kapitel 2: Die Fabrik",
+   "text": "Variablen, Funktionen, Listen und Dictionaries warten – und am Ende die Arena!"
+  },
+  "chapter": 1
+ },
+ {
+  "id": 11,
+  "chapter": 2,
+  "title": "Vermessung",
+  "concept": "Variablen",
+  "story": "Willkommen in der Fabrik! Die Zentrale braucht Messwerte: Wie lang sind die Gänge?",
+  "task": "Fahre bis zur Wand, zähle dabei deine Schritte und melde das Ergebnis mit `robot.report(zahl)`. In allen drei Gängen!",
+  "hints": [
+   "Eine Variable ist ein Merkzettel: `schritte = 0` legt ihn an.",
+   "Mit `schritte = schritte + 1` zählst du eins hoch.",
+   "```\nschritte = 0\nwhile robot.front_is_clear():\n    robot.move()\n    schritte = schritte + 1\nrobot.report(schritte)\n```"
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "at_goal",
+   "front_is_clear",
+   "enemy_ahead",
+   "enemy_count",
+   "wait",
+   "report"
+  ],
+  "introduces": [
+   "report",
+   "variables"
+  ],
+  "goals": [
+   "report"
+  ],
+  "report": "steps_to_wall",
+  "maps": [
+   [
+    "#########",
+    "#>......#",
+    "#########"
+   ],
+   [
+    "##############",
+    "#>...........#",
+    "##############"
+   ],
+   [
+    "#######",
+    "#>....#",
+    "#######"
+   ]
+  ],
+  "max_ticks": 120,
+  "stars": {
+   "lines": 5,
+   "ticks": 12
+  },
+  "starter_code": "schritte = 0\n# fahre bis zur Wand und zähle mit\n\nrobot.report(schritte)\n",
+  "reward": {
+   "icon": "mine",
+   "name": "Minenleger",
+   "text": "Neues Teil im Shop: Minenleger für die Arena."
   }
+ },
+ {
+  "id": 12,
+  "chapter": 2,
+  "title": "Schießstand-Parcours",
+  "concept": "Funktionen (def)",
+  "story": "Vier Nischen mit je zwei Zielscheiben. Immer dasselbe Manöver – aber die Abstände sind verschieden.",
+  "task": "Zerstöre alle Zielscheiben und fahre ins Ziel. Für 3 Sterne baust du dir eine eigene Funktion.",
+  "hints": [
+   "Mit `def name():` baust du dir einen eigenen Befehl.",
+   "Der eingerückte Teil darunter wird ausgeführt, wenn du `name()` aufrufst.",
+   "```\ndef nische():\n    robot.turn_left()\n    robot.shoot()\n    robot.shoot()\n    robot.turn_right()\n```"
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "at_goal",
+   "front_is_clear",
+   "enemy_ahead",
+   "enemy_count",
+   "wait"
+  ],
+  "introduces": [
+   "def"
+  ],
+  "goals": [
+   "destroy_all",
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "##############",
+    "##T##T###T#T##",
+    "##T##T###T#T##",
+    "#>..........G#",
+    "##############"
+   ]
+  ],
+  "max_ticks": 80,
+  "stars": {
+   "lines": 14,
+   "ticks": 27
+  },
+  "starter_code": "def nische():\n    robot.turn_left()\n    # ...\n\nrobot.move()\nnische()\n",
+  "reward": {
+   "icon": "hover",
+   "name": "Schwebe-Gleiter",
+   "text": "Neues Chassis im Shop: schwebt über Minen."
+  }
+ },
+ {
+  "id": 13,
+  "chapter": 2,
+  "title": "Treppen-Baukasten",
+  "concept": "Parameter in Funktionen",
+  "story": "Zwei Treppen, unterschiedlich lang. Eine Funktion für beide – das wäre doch was!",
+  "task": "Erreiche das Ziel. Für 3 Sterne: eine Funktion `treppe(n)`, die n Stufen nimmt.",
+  "hints": [
+   "Funktionen können Parameter haben: `def treppe(n):`",
+   "Innen benutzt du n wie eine Variable, z.B. `for i in range(n):`",
+   "Aufruf: `treppe(2)` und später `treppe(3)`."
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "at_goal",
+   "front_is_clear",
+   "enemy_ahead",
+   "enemy_count",
+   "wait"
+  ],
+  "introduces": [
+   "def_param"
+  ],
+  "goals": [
+   "reach_goal"
+  ],
+  "maps": [
+   [
+    "###########",
+    "#>.########",
+    "##..#######",
+    "###....####",
+    "######..###",
+    "#######..##",
+    "########.G#",
+    "###########"
+   ]
+  ],
+  "max_ticks": 80,
+  "stars": {
+   "lines": 10,
+   "ticks": 23
+  },
+  "starter_code": "def treppe(n):\n    for i in range(n):\n        robot.move()\n        # ...\n\ntreppe(2)\n",
+  "reward": {
+   "icon": "rocket",
+   "name": "Raketenwerfer",
+   "text": "Neue Waffe im Shop: Raketen mit Flächenschaden."
+  }
+ },
+ {
+  "id": 14,
+  "chapter": 2,
+  "title": "Radar-Raum",
+  "concept": "Listen",
+  "story": "Ein Raum mit vier Gängen. Dein neues Radar meldet, in welchen Richtungen Zielscheiben stehen – als Liste.",
+  "task": "Zerstöre alle Zielscheiben – in allen drei Räumen.",
+  "hints": [
+   "`robot.scan_directions()` gibt eine Liste zurück, z.B. `[\"N\", \"O\"]`.",
+   "`robot.face(\"N\")` dreht dich direkt nach Norden.",
+   "Mit `for richtung in liste:` gehst du jedes Element der Liste durch."
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "at_goal",
+   "front_is_clear",
+   "enemy_ahead",
+   "enemy_count",
+   "wait",
+   "face",
+   "scan_directions"
+  ],
+  "introduces": [
+   "scan_directions",
+   "face",
+   "lists"
+  ],
+  "goals": [
+   "destroy_all"
+  ],
+  "maps": [
+   [
+    "#########",
+    "####T####",
+    "####.####",
+    "####.####",
+    "#...^..T#",
+    "####.####",
+    "####.####",
+    "####.####",
+    "#########"
+   ],
+   [
+    "#########",
+    "####.####",
+    "####T####",
+    "####.####",
+    "#.T.^...#",
+    "####.####",
+    "####T####",
+    "####.####",
+    "#########"
+   ],
+   [
+    "#########",
+    "####.####",
+    "####.####",
+    "####.####",
+    "#T..^.T.#",
+    "####.####",
+    "####.####",
+    "####.####",
+    "#########"
+   ]
+  ],
+  "max_ticks": 40,
+  "stars": {
+   "lines": 3,
+   "ticks": 6
+  },
+  "starter_code": "richtungen = robot.scan_directions()\nrobot.say(richtungen)\n",
+  "reward": {
+   "icon": "radar",
+   "name": "Langstrecken-Radar",
+   "text": "Neues Modul im Shop: Radar für die ganze Arena."
+  }
+ },
+ {
+  "id": 15,
+  "chapter": 2,
+  "title": "Freund oder Feind",
+  "concept": "Dictionaries",
+  "story": "Achtung! Im Radar-Raum stehen jetzt auch befreundete Roboter. Wer sie trifft, hat verloren!",
+  "task": "Zerstöre nur die Feinde. Freunde dürfen nicht getroffen werden.",
+  "hints": [
+   "`robot.scan()` liefert eine Liste von Dictionaries, z.B. `{\"richtung\": \"N\", \"distanz\": 3, \"typ\": \"feind\"}`.",
+   "Einen Wert holst du mit eckigen Klammern: `ding[\"typ\"]`.",
+   "```\nfor ding in robot.scan():\n    if ding[\"typ\"] == \"feind\":\n        ...\n```"
+  ],
+  "api": [
+   "move",
+   "move_n",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "at_goal",
+   "front_is_clear",
+   "enemy_ahead",
+   "enemy_count",
+   "wait",
+   "face",
+   "scan"
+  ],
+  "introduces": [
+   "scan",
+   "dicts"
+  ],
+  "goals": [
+   "destroy_all"
+  ],
+  "maps": [
+   [
+    "#########",
+    "####F####",
+    "####.####",
+    "####.####",
+    "#T..^..F#",
+    "####.####",
+    "####E####",
+    "####.####",
+    "#########"
+   ],
+   [
+    "#########",
+    "####T####",
+    "####.####",
+    "####.####",
+    "#F..^.T.#",
+    "####.####",
+    "####.####",
+    "####F####",
+    "#########"
+   ],
+   [
+    "#########",
+    "####.####",
+    "####F####",
+    "####.####",
+    "#E..^...#",
+    "####.####",
+    "####.####",
+    "####T####",
+    "#########"
+   ]
+  ],
+  "max_ticks": 40,
+  "stars": {
+   "lines": 5,
+   "ticks": 6
+  },
+  "starter_code": "for ding in robot.scan():\n    robot.say(ding)\n",
+  "reward": {
+   "icon": "railgun",
+   "name": "Railgun",
+   "text": "Die stärkste Waffe im Shop – und die Arena ist fast offen!"
+  }
+ },
+ {
+  "id": 16,
+  "chapter": 2,
+  "title": "Arena-Qualifikation",
+  "concept": "update()-Funktion",
+  "story": "Die letzte Prüfung! In der Arena steuerst du nicht mehr Schritt für Schritt: Dein Roboter ruft in JEDEM Zug deine Funktion `update(robot)` auf und macht eine Aktion.",
+  "task": "Besiege die Blechbüchse und den Kreisel. Tipp: Der Kreisel schießt genauso schnell wie du – dein Schild hilft!",
+  "hints": [
+   "`update(robot)` wird jeden Zug neu aufgerufen. Pro Aufruf darf der Roboter EINE Aktion machen.",
+   "`robot.ready(\"shield\")` sagt dir, ob der Schild bereit ist.",
+   "```\ndef update(robot):\n    if robot.enemy_ahead():\n        if robot.ready(\"shield\") and not robot.shield_active:\n            robot.shield()\n        else:\n            robot.shoot()\n    else:\n        robot.turn_right()\n```"
+  ],
+  "type": "arena",
+  "arena": "trainingsplatz",
+  "opponents": [
+   "blechbuechse",
+   "kreisel"
+  ],
+  "loadout": {
+   "chassis": "standard",
+   "weapons": [
+    "laser"
+   ],
+   "modules": [
+    "shield"
+   ],
+   "paint": "cyan",
+   "hat": "antenna"
+  },
+  "api": [
+   "move",
+   "turn_left",
+   "turn_right",
+   "shoot",
+   "shield",
+   "wait",
+   "enemy_ahead",
+   "front_is_clear",
+   "ready"
+  ],
+  "introduces": [
+   "update",
+   "shield",
+   "ready"
+  ],
+  "goals": [
+   "win"
+  ],
+  "maps": [
+   [
+    "###########",
+    "#.........#",
+    "#.1.....2.#",
+    "#.........#",
+    "###########"
+   ]
+  ],
+  "max_ticks": 150,
+  "stars": {
+   "lines": 8,
+   "ticks": 30
+  },
+  "starter_code": "def update(robot):\n    if robot.enemy_ahead():\n        robot.shoot()\n    else:\n        robot.turn_right()\n",
+  "reward": {
+   "icon": "arena",
+   "name": "Arena-Zugang",
+   "text": "Die Arena ist offen! Baue deinen Kampfroboter und tritt gegen andere an."
+  }
+ }
 ]

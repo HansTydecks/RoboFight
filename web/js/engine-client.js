@@ -4,6 +4,7 @@ export class Engine {
     this.onStatus = onStatus || (() => {});
     this.nextId = 1;
     this.pending = new Map();
+    this.aiBots = [];
     this._spawn();
   }
 
@@ -15,6 +16,7 @@ export class Engine {
       this._resolveReady = resolve;
       this._rejectReady = reject;
     });
+    this.ready.catch(() => {});
     this.worker.onmessage = (e) => this._onMessage(e.data);
     this.worker.onerror = (e) => {
       this.onStatus("error", e.message);
@@ -25,6 +27,7 @@ export class Engine {
   _onMessage(msg) {
     if (msg.type === "ready") {
       this.isReady = true;
+      this.aiBots = msg.aiBots;
       this.onStatus("ready");
       this._resolveReady();
     } else if (msg.type === "fatal") {
@@ -39,7 +42,7 @@ export class Engine {
     }
   }
 
-  async run(mission, code, timeoutMs = 20000) {
+  async _send(payload, timeoutMs = 20000) {
     await this.ready;
     const id = this.nextId++;
     return new Promise((resolve, reject) => {
@@ -52,7 +55,22 @@ export class Engine {
         reject(err);
       }, timeoutMs);
       this.pending.set(id, { resolve, reject, timer });
-      this.worker.postMessage({ id, mission, code });
+      this.worker.postMessage({ id, ...payload });
     });
+  }
+
+  run(mission, code) {
+    return this._send({ type: "run", mission, code });
+  }
+
+  match(args) {
+    return this._send({ type: "match", args }, 60000);
+  }
+
+  /** Economy rules (Python). Resolves {profile, result} or rejects with a kid-friendly message. */
+  async economy(op, profile, args) {
+    const out = await this._send({ type: "economy", op, profile, args });
+    if (out.error) throw Object.assign(new Error(out.error), { friendly: true });
+    return out;
   }
 }

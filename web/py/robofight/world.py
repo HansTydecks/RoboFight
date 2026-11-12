@@ -6,7 +6,7 @@ Frames are plain dicts so they can be sent to the browser as JSON
 and replayed identically anywhere.
 """
 
-from .errors import MissionComplete, OutOfTime, RobotDestroyed
+from .errors import MissionComplete, MissionFailed, OutOfTime, RobotDestroyed
 
 DIRS = {"N": (0, -1), "E": (1, 0), "S": (0, 1), "W": (-1, 0)}
 ORDER = ["N", "E", "S", "W"]
@@ -16,7 +16,9 @@ ENTITY_CHARS = {
     "T": {"kind": "target", "hp": 1},
     "E": {"kind": "sentry", "hp": 1},
     "B": {"kind": "boss", "hp": 3},
+    "F": {"kind": "friend", "hp": 1},
 }
+HOSTILE = {"target", "sentry", "boss"}
 
 BOSS_COOLDOWN = 5
 
@@ -86,11 +88,21 @@ class World:
             raise ValueError("Map has no robot start (^ > v <)")
         self.rx, self.ry, self.rdir = start
         self.crystals_total = len(self.crystals)
+        self.reported = None
+        self.report_truth = None
+        if mission.get("report") == "steps_to_wall":
+            dx, dy = DIRS[self.rdir]
+            n, cx, cy = 0, self.rx, self.ry
+            while not self.blocked(cx + dx, cy + dy):
+                n += 1
+                cx, cy = cx + dx, cy + dy
+            self.report_truth = n
 
         self.tick = 0
         self.frames = []
         self.pending_events = []
         self.ended = None  # SimulationEnd instance once finished
+        self.pending_fail = None
         self._record(line=None)
 
     # ------------------------------------------------------------------ queries
@@ -120,10 +132,21 @@ class World:
         return self.goal is not None and (self.rx, self.ry) == self.goal
 
     def enemy_ahead(self):
-        return self._ray(self.rx, self.ry, self.rdir)[1] is not None
+        e = self._ray(self.rx, self.ry, self.rdir)[1]
+        return e is not None and e.kind in HOSTILE
 
     def enemy_count(self):
-        return sum(1 for e in self.entities if e.alive)
+        return sum(1 for e in self.entities if e.alive and e.kind in HOSTILE)
+
+    def scan(self):
+        """First object in each direction (N, E, S, W) – as list of dicts."""
+        out = []
+        for d in ORDER:
+            end, e, _ = self._ray(self.rx, self.ry, d)
+            if e is not None:
+                out.append({"richtung": d, "distanz": abs(e.x - self.rx) + abs(e.y - self.ry),
+                            "typ": "feind" if e.kind in HOSTILE else "freund"})
+        return out
 
     def _ray(self, x, y, d, stop_at_robot=False):
         """Walk from (x, y) in direction d. Returns (last_pos, entity_hit, robot_hit)."""
@@ -169,6 +192,9 @@ class World:
     def _do_wait(self):
         pass
 
+    def _do_face(self, d):
+        self.rdir = d
+
     def _do_shoot(self):
         if self.energy is not None:
             if self.energy <= 0:
@@ -183,6 +209,8 @@ class World:
             self.event(type="hit", x=hit.x, y=hit.y, id=hit.id)
             if not hit.alive:
                 self.event(type="explode", x=hit.x, y=hit.y, id=hit.id)
+                if hit.kind == "friend":
+                    self.pending_fail = "Oh nein – du hast einen Freund getroffen! Prüfe vor dem Schießen den Typ."
 
     # ------------------------------------------------------------------ npcs
     def _npc_phase(self):
@@ -229,6 +257,8 @@ class World:
                 return False
             if g == "destroy_all" and self.enemy_count() > 0:
                 return False
+            if g == "report" and self.reported != self.report_truth:
+                return False
         return True
 
     def _end_tick(self, line):
@@ -240,9 +270,24 @@ class World:
         if self.robot_hp <= 0:
             self.ended = RobotDestroyed()
             raise self.ended
+        if self.pending_fail:
+            self.ended = MissionFailed(self.pending_fail)
+            raise self.ended
         if self.tick >= self.max_ticks:
             self.ended = OutOfTime(self.max_ticks)
             raise self.ended
+
+    def report(self, value, line):
+        if self.ended is not None:
+            raise self.ended
+        self.event(type="say", text=f"Messwert: {value}", line=line)
+        self.reported = value
+        if value != self.report_truth:
+            self.flush(line)
+            self.ended = MissionFailed(
+                f"Falsch gemessen: Du hast {value!r} gemeldet, richtig wäre {self.report_truth}.")
+            raise self.ended
+        self.after_command()
 
     def after_command(self):
         """Goals are checked after a whole command, so `move(50)` can't win by

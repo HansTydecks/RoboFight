@@ -1,0 +1,102 @@
+[
+ {
+  "id": "blechbuechse",
+  "name": "Blechbüchse",
+  "tier": 1,
+  "file": "blechbuechse.py",
+  "elo": 900,
+  "desc": "Ein Übungs-Dummy. Wehrt sich kaum.",
+  "reward": 40,
+  "loadout": {
+   "chassis": "standard",
+   "weapons": [
+    "laser"
+   ],
+   "modules": [],
+   "paint": "white",
+   "hat": "none"
+  }
+ },
+ {
+  "id": "kreisel",
+  "name": "Kreisel",
+  "tier": 2,
+  "file": "kreisel.py",
+  "elo": 1000,
+  "desc": "Dreht sich im Kreis und schießt, wenn du vor ihm stehst.",
+  "reward": 60,
+  "loadout": {
+   "chassis": "standard",
+   "weapons": [
+    "laser"
+   ],
+   "modules": [],
+   "paint": "orange",
+   "hat": "propeller"
+  }
+ },
+ {
+  "id": "jaeger",
+  "name": "Jäger",
+  "tier": 3,
+  "file": "jaeger.py",
+  "elo": 1150,
+  "desc": "Verfolgt dich durch die ganze Arena.",
+  "reward": 80,
+  "loadout": {
+   "chassis": "scout",
+   "weapons": [
+    "laser"
+   ],
+   "modules": [
+    "radar"
+   ],
+   "paint": "green",
+   "hat": "antenna"
+  }
+ },
+ {
+  "id": "taktiker",
+  "name": "Taktiker",
+  "tier": 4,
+  "file": "taktiker.py",
+  "elo": 1300,
+  "desc": "Schild, Raketen und Radar – denkt mit.",
+  "reward": 120,
+  "loadout": {
+   "chassis": "tank",
+   "weapons": [
+    "laser",
+    "rocket"
+   ],
+   "modules": [
+    "shield",
+    "radar"
+   ],
+   "paint": "purple",
+   "hat": "horns"
+  }
+ },
+ {
+  "id": "chef",
+  "name": "Chef-Bot",
+  "tier": 5,
+  "file": "chef.py",
+  "elo": 1450,
+  "desc": "Der Endgegner: Railgun, Turbo, Radar und ein Gedächtnis.",
+  "reward": 200,
+  "loadout": {
+   "chassis": "tank",
+   "weapons": [
+    "laser",
+    "railgun"
+   ],
+   "modules": [
+    "radar",
+    "turbo"
+   ],
+   "paint": "red",
+   "hat": "crown"
+  }
+ }
+]

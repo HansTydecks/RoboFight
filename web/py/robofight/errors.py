@@ -15,6 +15,14 @@ class MissionComplete(SimulationEnd):
     reason = "Mission geschafft!"
 
 
+class MissionFailed(SimulationEnd):
+    status = "failed"
+
+    def __init__(self, reason):
+        super().__init__()
+        self.reason = reason
+
+
 class RobotDestroyed(SimulationEnd):
     status = "destroyed"
     reason = "Dein Roboter wurde zerstört."

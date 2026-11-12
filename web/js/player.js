@@ -115,6 +115,8 @@ export class Player {
     const a = this.frames[this.index];
     const b = this.frames[this.index + 1];
     const p = this.playing && b ? this.progress : 0;
-    this.arena.render(a, p > 0 ? b : a, p, { bubble: this.bubble() });
+    this.arena.render(a, p > 0 ? b : a, p, {
+      bubble: this.bubble(), frames: this.frames, index: this.index, progress: p,
+    });
   }
 }

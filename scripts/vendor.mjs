@@ -12,6 +12,7 @@ const files = {
   pyodide: ["pyodide.js", "pyodide.asm.js", "pyodide.asm.wasm", "python_stdlib.zip", "pyodide-lock.json"],
   codemirror: ["lib/codemirror.js", "lib/codemirror.css", "mode/python/python.js",
     "addon/edit/matchbrackets.js", "addon/edit/closebrackets.js"],
+  three: ["build/three.module.min.js", "examples/jsm/controls/OrbitControls.js"],
 };
 
 if (!existsSync(nm)) {

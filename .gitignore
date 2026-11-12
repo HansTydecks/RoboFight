@@ -2,3 +2,5 @@ node_modules/
 web/vendor/
 __pycache__/
 .pytest_cache/
+robofight.db
+*.db

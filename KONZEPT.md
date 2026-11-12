@@ -1,5 +1,10 @@
 # RoboFight – Konzept & Ideensammlung
 
+> **Stand v1.0:** Umgesetzt sind Phase 0 bis 2 sowie große Teile von Phase 3. Dazu gehören Konten (lokal und Server),
+> 16 Missionen, Shop und Werkstatt mit 3D-Modellen, die 3D-Arena mit Training, Rangliste und Elo/Ligen, Replays
+> und das Lehrer-Dashboard. Noch offen sind unter anderem Team-PvP, Saisons, Level-Editor, Schul-SSO/LTI,
+> der KI-Tutor und App-Store-Versionen.
+
 > Kinder programmieren Roboter in Python, die selbstständig Quests lösen (PvE) und gegen andere Roboter antreten (PvP).
 > Neue Fähigkeiten gibt es nicht per Kauf, sondern durch **gelernte Programmierkonzepte**.
 > Zielgruppe: Schule (ca. 10–16 Jahre), Lehrkräfte, Eltern.

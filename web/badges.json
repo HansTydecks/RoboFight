@@ -1,0 +1,15 @@
+[
+  {"id": "first", "name": "Erste Fahrt", "desc": "Mission 1 geschafft", "icon": "flag"},
+  {"id": "loop", "name": "Schleifen-Starter", "desc": "Die Treppe mit 3 Sternen", "icon": "loop"},
+  {"id": "bug", "name": "Bug-Jäger", "desc": "10 Fehler gefunden und trotzdem weitergemacht", "icon": "bug"},
+  {"id": "mini", "name": "Minimalist", "desc": "Weniger Zeilen als für 3 Sterne nötig", "icon": "mini"},
+  {"id": "runs", "name": "Dranbleiber", "desc": "50 Programme gestartet", "icon": "bolt"},
+  {"id": "boss", "name": "Wächter-Bezwinger", "desc": "Den Boss aus Kapitel 1 besiegt", "icon": "trophy"},
+  {"id": "chapter2", "name": "Fabrik-Meister", "desc": "Kapitel 2 abgeschlossen", "icon": "wrench"},
+  {"id": "perfect", "name": "Perfektionist", "desc": "Alle Missionen mit 3 Sternen", "icon": "star"},
+  {"id": "shopper", "name": "Schrauber", "desc": "Das erste Teil gekauft", "icon": "cart"},
+  {"id": "first_win", "name": "Arena-Debüt", "desc": "Den ersten Arena-Kampf gewonnen", "icon": "arena"},
+  {"id": "training", "name": "Trainings-Champion", "desc": "Alle 5 Trainings-Bots besiegt", "icon": "medal"},
+  {"id": "gold_league", "name": "Goldliga", "desc": "Elo 1250 erreicht", "icon": "crown"},
+  {"id": "collector", "name": "Sammler", "desc": "10 Teile besessen", "icon": "box"}
+]
